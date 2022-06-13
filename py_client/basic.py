@@ -10,6 +10,6 @@ get_response = requests.get(endpoint, params={'abc': 123}, json={'query': 'Hello
 # print(get_response.status_code)
 
 # print(get_response.json()['message'])
-print(get_response.headers)
+# print(get_response.headers)
 print(get_response.json())
 print(get_response.status_code)
