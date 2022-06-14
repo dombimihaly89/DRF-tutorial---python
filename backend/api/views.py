@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 from products.models import Product
 from products.serializers import ProductSerializer
-from django.forms.models import model_to_dict
+# from django.forms.models import model_to_dict
 
 # def api_home(request, *args, **kwargs):
 #     # request -> HttpRequest -> Django
@@ -41,4 +41,14 @@ def api_home(request, *args, **kwargs):
     if instance:
         # data = model_to_dict(model_data, fields=['id', 'title', 'price', 'sale_price'])
         data = ProductSerializer(instance).data
+    return Response(data)
+
+@api_view(['POST'])
+def api_home_post(request, *args, **kwargs):
+    serializer = ProductSerializer(data=request.data)
+    data = {}
+    if serializer.is_valid(raise_exception=True):
+        instance = serializer.save()
+        print(f'instance : {instance}')
+        data = serializer.data
     return Response(data)
